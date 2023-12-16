@@ -1,3 +1,22 @@
+@mixin mobile{
+    @media screen and (max-width: 480px){
+        @content;   
+    }
+}
+
+@mixin tablet{
+    @media screen and (max-width: 768px){
+        @content;   
+    }
+}
+
+@mixin laptop{
+    @media screen and (max-width: 1200px){
+        @content;   
+    }
+}
+
+
 .formContainer{
     background-color: #a7bcff;
     height: 100vh;
@@ -18,6 +37,7 @@
             color: #5d5b8d;
             font-weight: bold;
             font-size: 24px;
+            
         }
 
         .title{
@@ -83,11 +103,15 @@
         height: 80%;
         display: flex;
         overflow: hidden;
+        @include tablet{
+            width: 90%; 
+        }
 
         /* side bar */
         .sidebar{
             flex: 1;
             background-color: #3e3c61;
+            position: relative;
 
 
             .navbar{
@@ -101,6 +125,9 @@
 
                 .logo{
                     font-weight: bold;
+                    @include tablet{
+                        display: none;
+                    }
     
                 }
 
@@ -121,6 +148,10 @@
                         color: #ddddf7;
                         font-size: 10px;
                         cursor: pointer;
+                        @include tablet{
+                            position: absolute;
+                            bottom: 10px;
+                        }
                     }
                 }
 
@@ -216,11 +247,13 @@
                 background-color: #ddddf7;
                 padding: 10px;
                 height: calc(100% - 160px);
+                overflow: scroll;
 
                 /* message compo */
                 .message{
                     display: flex;
                     gap: 20px;
+                    margin-bottom: 20px;
 
                     .messageInfo{
                         display: flex;
@@ -228,7 +261,7 @@
                         color: gray;
                         font-weight: 300;
 
-                        
+
                         img{
                             width: 40px;
                             height: 40px;
@@ -238,10 +271,39 @@
                     }
 
                     .messageContent{
+                        max-width: 80%;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 10px;
+
+                        p{
+                            background-color: white;
+                            padding: 10px 20px;
+                            border-radius: 0px 10px 10px 10px;
+                            max-width: max-content;
+                        }
+
                         img{
                             width: 50%;
                         }
                     }
+
+                    &.owner{
+                        flex-direction: row-reverse;
+
+                        .messageContent{
+                            align-items: flex-end;
+                            
+                            p{
+                                background-color: #8da4f1;
+                                color: white;
+                                border-radius: 10px 0 10px 10px;
+                            }
+                            
+                        }
+
+                    }
+
                 }
             }
 
